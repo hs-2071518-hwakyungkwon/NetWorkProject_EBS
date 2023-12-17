@@ -64,6 +64,7 @@ public class EbsClient extends JFrame {
         jTextField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 sendChat();
             }
         });
