@@ -1,3 +1,5 @@
+package Client;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -5,6 +7,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
+import Login.MainLogin;
+import Login.JoinService;
 
 import java.io.*;
 import java.net.*;
@@ -33,6 +38,10 @@ public class EbsClient extends JFrame implements ActionListener, Runnable {
 
 
     public EbsClient() {
+        this.getPreferredSize();
+        this.setLocation(200, 200);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
             initComponents();
             addListener();
@@ -47,7 +56,9 @@ public class EbsClient extends JFrame implements ActionListener, Runnable {
         this.setTitle("EbsChat");
         this.setBackground(new Color(198, 214, 255));
 
+        /* 만져야할 부분인듯 로그인 아이디 토대로*/
         nickname_lb.setText("닉네임");
+
         nickname_lb.setBounds(15, 10, 45, 25);
         this.add(nickname_lb);
 
@@ -124,7 +135,7 @@ public class EbsClient extends JFrame implements ActionListener, Runnable {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == nickname_tf || e.getSource() == conn_bt) {
+        if (e.getSource() == nickname_tf || e.getSource() == conn_bt) { /* 닉네임과 접속버튼이 눌렸을 때 */
             //대화명 입력 후 접속
             if (nickname_tf.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "대화명 입력");
@@ -172,7 +183,7 @@ public class EbsClient extends JFrame implements ActionListener, Runnable {
                     System.out.println("대화명 변경 오류:" + e2);
                 }
             }
-        } else if (e.getSource() == end_bt) {
+        } else if (e.getSource() == end_bt) { /* 나가기 버튼*/
             //나가기
             try {
                 out.write(("/q\n").getBytes());
@@ -256,10 +267,6 @@ public class EbsClient extends JFrame implements ActionListener, Runnable {
     }
 
     public static void main(String args[]) {
-        EbsClient fr = new EbsClient();
-        fr.getPreferredSize();
-        fr.setLocation(200, 200);
-        fr.setVisible(true);
-        fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new MainLogin();
     }
 }
